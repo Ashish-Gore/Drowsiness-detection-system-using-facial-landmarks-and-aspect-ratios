@@ -22,26 +22,35 @@ Here's a breakdown of the code:
 ### 1. Importing Libraries:
 
 `scipy.spatial.distance`: Used for computing distances between points.
+
 `imutils.face_utils`: Contains utility functions for working with facial landmarks.
+
 `imutils`: Provides convenience functions for OpenCV operations.
+
 `dlib`: A library for machine learning, computer vision, and image processing.
+
 `cv2`: OpenCV, a popular computer vision library.
 
 ### 2. Defining Helper Functions:
 
 `eye_aspect_ratio(eye)`: Computes the eye aspect ratio (EAR) given the coordinates of the eye landmarks.
+
 `mouth_aspect_ratio(mouth)`: Computes the mouth aspect ratio (MAR) given the coordinates of the mouth landmarks.
 
 ### 3. Setting Thresholds and Constants:
 
 `thresh_eyes`: Threshold for detecting drowsiness based on eye aspect ratio.
+
 `thresh_mouth`: Threshold for detecting an open mouth based on mouth aspect ratio.
+
 `frame_check`: Number of consecutive frames for which the conditions must be met to trigger an alert.
+
 Facial landmark indices for left eye (`lStart`, `lEnd`), right eye (`rStart`, `rEnd`), and mouth (`mStart`, `mEnd`).
 
 ### 4. Initializing Video Capture and Flags:
 
 `cap`: Captures video from the default camera (index 0).
+
 `flag_eyes` and `flag_mouth`: Counters for consecutive frames where drowsiness conditions are met.
 
 ### 5. Main Loop:
@@ -72,34 +81,42 @@ Facial landmark indices for left eye (`lStart`, `lEnd`), right eye (`rStart`, `r
 
 In the given code, EAR (Eye Aspect Ratio) and MAR (Mouth Aspect Ratio) are used as metrics to assess the state of a person's eyes and mouth, respectively. These ratios are computed based on the spatial relationships between specific facial landmarks.
 
+<img src="https://github.com/Ashish-Gore/Drowsiness-detection-system-using-facial-landmarks-and-aspect-ratios/blob/main/assets/Facial%20Landmarks.png"/>
+
+**Facial landmarks Detection output on input Image:**
+
+<img src="https://github.com/Ashish-Gore/Drowsiness-detection-system-using-facial-landmarks-and-aspect-ratios/blob/main/assets/Detected%20Landmarks.png"/>
+
 ### Eye Aspect Ratio (EAR):
 The Eye Aspect Ratio is a measure that helps quantify the openness of the eyes. It is calculated using the formula:
 
+<img src="https://github.com/Ashish-Gore/Drowsiness-detection-system-using-facial-landmarks-and-aspect-ratios/blob/main/assets/EAR_Aspect%20ratio.png"/>
 
 
 Where:
 
-- P1,P2,P3,P4,P5,P6 are specific landmarks corresponding to the eye.
-- ∣P2−P6∣ represents the vertical distance between the upper and lower eyelids.
-- ∣P3−P5∣ represents the horizontal distance between the inner and outer corners of the eye.
-- ∣P1−P4∣ represents the diagonal distance between the top-left and bottom-right corners of the eye.
+- v,z,w,y,u,x are specific landmarks corresponding to the eye.
+- ∣v−z∣ represents the vertical distance between the upper and lower eyelids.
+- ∣w−y∣ represents the horizontal distance between the inner and outer corners of the eye.
+- ∣u−x∣ represents the diagonal distance between the top-left and bottom-right corners of the eye.
 The EAR is used as a reliable indicator of eye closure. A lower EAR indicates closed eyes, while a higher EAR corresponds to open eyes. In the context of drowsiness detection, a significant decrease in EAR may suggest that the person's eyes are closing, indicating drowsiness or fatigue.
 
 
 ### Mouth Aspect Ratio (MAR):
 The Mouth Aspect Ratio is a measure that quantifies the width of the mouth relative to its height. The formula for MAR is:
 
+<img src="https://github.com/Ashish-Gore/Drowsiness-detection-system-using-facial-landmarks-and-aspect-ratios/blob/main/assets/MAR_Aspect%20ratio.png"/>
 
 
 Where:
 
-- P12,P14,P16,P18 are specific landmarks corresponding to the mouth.
-- ∣P14−P18∣ represents the horizontal distance between the corners of the mouth.
-- ∣P12−P16∣ represents the vertical distance between the upper and lower lips.
+- t,z,u,y,v,x are specific landmarks corresponding to the mouth.
+- ∣s−w∣ represents the horizontal distance between the corners of the mouth.
+- ∣t−z∣ ∣u−y∣ ∣v−x∣ represents the vertical distance between the upper and lower lips.
 
 A higher MAR indicates a more open mouth, and a lower MAR suggests a closed or partially closed mouth. In the drowsiness detection context, an increase in MAR may indicate yawning, which is often associated with drowsiness.
 
-#### Application in the Code:
+## Application in the Code:
 The code uses these ratios to monitor the eyes and mouth of a person in real-time video frames. If the computed EAR falls below a certain threshold or the MAR exceeds a specified threshold for a certain number of consecutive frames, the system triggers an alert, as this behavior is indicative of potential drowsiness. Adjusting the threshold values allows for customization based on specific use cases or preferences.
 
 
@@ -121,6 +138,6 @@ Contributions to this project are welcome. If you have suggestions, improvements
 This project is licensed under the GNU General Public License.
 
 ## Acknowledgments:
-We would like to express our gratitude to the open-source community and the developers of YOLO for their contributions to computer vision and object detection.
+We would like to express our gratitude to the open-source community and the developers of Dlib, OpenCV, SciPy for their contributions to computer vision. 
 
 Feel free to customize the above sections according to your project specifics.
